@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TodoApplication {
 
 	public static void main(String[] args) {
+		// Run the REST API
 		SpringApplication.run(TodoApplication.class, args);
 	}
 
