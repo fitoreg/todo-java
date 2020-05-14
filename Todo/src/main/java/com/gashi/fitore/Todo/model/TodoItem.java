@@ -50,7 +50,7 @@ public class TodoItem {
         return isDone;
     }
 
-    public void setDone(boolean done) {
+    public void setIsDone(boolean done) {
         isDone = done;
     }
 }
