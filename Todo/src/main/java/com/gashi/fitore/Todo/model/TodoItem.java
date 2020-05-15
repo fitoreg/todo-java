@@ -11,11 +11,15 @@ public class TodoItem {
     // Properties
     @Id // Primary key
     @GeneratedValue // Generates keys automatically
-    private Long id;
+    private Long id; // Id of the TodoItem
+
+    // @NotBlank: Annotation that manages the title string to be never blank
+    // Title of the TodoItem
     @NotBlank
     private String title;
-    private boolean  isDone;
 
+    // Completion flag
+    private boolean  isDone;
 
     // Empty Constructor
     public TodoItem() {
@@ -23,7 +27,6 @@ public class TodoItem {
 
     // Constructor
     public TodoItem(Long id, String title, boolean isDone) {
-
         this.id = id;
         this.title = title;
         this.isDone = isDone;

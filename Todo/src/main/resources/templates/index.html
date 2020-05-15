@@ -30,14 +30,9 @@
 
     <!-- First grab an UUID from backend -->
 
-
-
-
 </div>
 
 <h2>Fitore Gashi Programin ne java detyre</h2>
-
-
 
 <script type="text/javascript">
 
@@ -59,9 +54,6 @@
             // We loop through the JSON response and create rows for each TodoItem
             // by calling the createTodoRow() method.
             for (var i = 0; i < data.length; i++) {
-
-
-
             var cList = $('ul.todo-list');
             var li = $('<li/>')
                 .attr("id", "item" + data[i].id)
@@ -70,10 +62,7 @@
                             li.addClass('completed')
                         }
             createTodoRow(li, data[i]);
-
-
         }
-
 }
             // Helper method to handle entry into the text field.
             function handleEnterKey(e) {
@@ -85,14 +74,12 @@
                     // Check if we are editing or not!
                     var isEditing = $("#taskNameTextField").attr("isEditing");
 
-
                     if (isEditing) {
                         // clear editing flag.
                         $("#taskNameTextField").removeAttr("isEditing");
                         var itemId = $("#taskNameTextField").attr("editingItemId");
                         $("#taskNameTextField").removeAttr("editingItemId");
                         putEditTodoItem(itemId, taskName);
-
                     }
                     else {
                         postNewTodoItem(taskName);
@@ -106,15 +93,12 @@
                 var itemTitle = $(ele).attr("title"); // get the item id!
                 var itemIsDone = $(ele).attr("isDone"); // get the item id!
                 itemIsDone = true;
-
                 var newTodoItem = {
                     id: itemId,
                     title: itemTitle,
                     isDone: itemIsDone
                 };
                 var requestJSON = JSON.stringify(newTodoItem);
-
-
                 putEditTodoItem(itemId, itemTitle, itemIsDone);
             }
 
@@ -137,17 +121,10 @@
                         // Create new list item
                         var newListItem = $('<li/>')
                         .attr("id", "item" + data.id);
-
-
-
-
-                        if (isDone == true) {
+                          if (isDone == true) {
                             newListItem.addClass('completed')
                         }
-
                         createTodoRow(newListItem, data);
-
-
 
                         // Replace the old one by the new one
                         var oldListItem = $("#item" + data.id);
@@ -176,8 +153,6 @@
                         var li = $('<li/>')
                             .attr("id", "item" + data.id)
                             .appendTo(cList);
-
-
                         createTodoRow(li, data);
                     },
                     error: function (data) {
@@ -192,7 +167,6 @@
                     url: "http://localhost:8080/todo/" + itemId,
                     success: function (data) {
                         var oldItem = $("#item" + itemId);
-
                         cuteHide(oldItem);
                         oldItem.remove();
                     },
