@@ -63,6 +63,9 @@ Më anë të kontrollerit, i definojme aksionet CRUD (Create, Read, Update, Dele
     }
     }
     
+## GUI
+GUI (Graphical User Interface) është zhvilluar në HTML/CSS, ndersa API është thirrur përmes JavaScript. Pasi të bëhet `run` projekti, në follderin `~/resources/templates/index.html` mund ta hapni front-end të projektit dhe t'i testoni funksionet.
+
 ## Instalimi
 
 Për ta testuar programin, fillimisht duhet të instalohet Spring framework (https://www.jetbrains.com/help/idea/spring-boot.html). Pastaj, programi mund të startohet më anë të klases `TodoApplication`:
