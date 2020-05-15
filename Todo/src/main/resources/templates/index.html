@@ -24,7 +24,7 @@
         </form>
     </div>
 
-    <ul class="todo-list"> <input type="checkbox" >
+    <ul class="todo-list"> 
     </ul>
 
     <!-- First grab an UUID from backend -->
@@ -55,12 +55,21 @@
             // We loop through the JSON response and create rows for each TodoItem
             // by calling the createTodoRow() method.
             for (var i = 0; i < data.length; i++) {
+
+
+
             var cList = $('ul.todo-list');
             var li = $('<li/>')
                 .attr("id", "item" + data[i].id)
                 .appendTo(cList);
+                if (data[i].done == true) {
+                            li.addClass('completed')
+                        }
             createTodoRow(li, data[i]);
+
+
         }
+
 }
             // Helper method to handle entry into the text field.
             function handleEnterKey(e) {
@@ -72,12 +81,14 @@
                     // Check if we are editing or not!
                     var isEditing = $("#taskNameTextField").attr("isEditing");
 
+
                     if (isEditing) {
                         // clear editing flag.
                         $("#taskNameTextField").removeAttr("isEditing");
                         var itemId = $("#taskNameTextField").attr("editingItemId");
                         $("#taskNameTextField").removeAttr("editingItemId");
                         putEditTodoItem(itemId, taskName);
+
                     }
                     else {
                         postNewTodoItem(taskName);
@@ -123,11 +134,16 @@
                         var newListItem = $('<li/>')
                         .attr("id", "item" + data.id);
 
+
+
+
                         if (isDone == true) {
                             newListItem.addClass('completed')
                         }
 
                         createTodoRow(newListItem, data);
+
+
 
                         // Replace the old one by the new one
                         var oldListItem = $("#item" + data.id);
@@ -156,6 +172,7 @@
                         var li = $('<li/>')
                             .attr("id", "item" + data.id)
                             .appendTo(cList);
+
 
                         createTodoRow(li, data);
                     },
@@ -213,6 +230,7 @@
                     .attr("onclick", "changeDoneState(this)")
                     .addClass('todo-completed')
                     .appendTo(todoRow);
+
 
                 var checkBoxIcon = $('<i/>')
                     .addClass('material-icons toggle-completed-checkbox')
