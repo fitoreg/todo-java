@@ -38,7 +38,7 @@ Repository na shërben për t'i ruajtur Todo Items në databazen lokale.
 
 Më anë të kontrollerit, i definojme aksionet CRUD (Create, Read, Update, Delete) apo në metodologjine e REST - GET, POST, PUT, DELETE. Në klasën `TodoController` i kemi te definuar keto metoda:
 
-    public class TodoController {
+	public class TodoController {
 
     @Autowired
     private TodoItemRepository todoRepository;
@@ -67,10 +67,10 @@ Më anë të kontrollerit, i definojme aksionet CRUD (Create, Read, Update, Dele
 
 Për ta testuar programin, fillimisht duhet të instalohet Spring framework (https://www.jetbrains.com/help/idea/spring-boot.html). Pastaj, programi mund të startohet më anë të klases `TodoApplication`:
 
-`@SpringBootApplication
-public class TodoApplication {
-    public static void main(String[] args) {
-        // Run the REST API
-        SpringApplication.run(TodoApplication.class, args);
-    }
-} `  
+	@SpringBootApplication
+	public class TodoApplication {
+		public static void main(String[] args) {
+			// Run the REST API
+			SpringApplication.run(TodoApplication.class, args);
+		}
+	}  
