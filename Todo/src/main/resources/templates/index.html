@@ -9,12 +9,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <!--For material icon-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">.
 </head>
 <body>
 
 
 <div class="todo-content">
-    <h1 class="page-title"> My Todo </h1>
+    <h1 class="page-title"> Cka ka me bo' </h1>
 
     <div class="todo-create">
         <!--Create a text box and handle ENTER to create item-->
@@ -24,7 +25,7 @@
         </form>
     </div>
 
-    <ul class="todo-list"> 
+    <ul class="todo-list">
     </ul>
 
     <!-- First grab an UUID from backend -->
@@ -109,7 +110,7 @@
                     isDone: itemIsDone
                 };
                 var requestJSON = JSON.stringify(newTodoItem);
-                console.log(requestJSON);
+
 
                 putEditTodoItem(itemId, itemTitle, itemIsDone);
             }
@@ -188,7 +189,7 @@
                     url: "http://localhost:8080/todo/" + itemId,
                     success: function (data) {
                         var oldItem = $("#item" + itemId);
-                        console.log( "kari" );
+
                         cuteHide(oldItem);
                         oldItem.remove();
                     },
