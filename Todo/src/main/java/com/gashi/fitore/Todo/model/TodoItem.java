@@ -21,9 +21,6 @@ public class TodoItem {
     // Completion flag
     private boolean  isDone;
 
-    // Category of the Item
-    private TodoCategory category;
-
     // Empty Constructor
     public TodoItem() {
     }
@@ -58,13 +55,5 @@ public class TodoItem {
 
     public void setIsDone(boolean done) {
         isDone = done;
-    }
-
-    public TodoCategory getCategory() {
-        return category;
-    }
-
-    public void setCategory(TodoCategory category) {
-        this.category = category;
     }
 }
