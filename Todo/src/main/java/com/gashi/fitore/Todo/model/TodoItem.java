@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 
 @Entity
 public class TodoItem {
@@ -12,6 +13,8 @@ public class TodoItem {
     @Id // Primary key
     @GeneratedValue // Generates keys automatically
     private Long id; // Id of the TodoItem
+
+    private Long userId;
 
     // @NotBlank: Annotation that manages the title string to be never blank
     // Title of the TodoItem
@@ -26,8 +29,9 @@ public class TodoItem {
     }
 
     // Constructor
-    public TodoItem(Long id, String title, boolean isDone) {
+    public TodoItem(Long id, Long userId, @NotBlank String title, boolean isDone) {
         this.id = id;
+        this.userId = userId;
         this.title = title;
         this.isDone = isDone;
     }
@@ -39,6 +43,14 @@ public class TodoItem {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getTitle() {

@@ -15,6 +15,8 @@ public class UserService implements IUserService {
     @Autowired
     private UserRepository repository;
 
+    public User currentUser;
+
     @Transactional
     @Override
     public User registerNewUserAccount(User user) throws UserAlreadyExistException {
@@ -33,6 +35,7 @@ public class UserService implements IUserService {
         User loggedInUser = repository.findUserByEmail(user.getEmail());
         if (loggedInUser.getPassword().equals(user.getPassword())) {
             System.out.println("*******: " + loggedInUser.getPassword());
+            currentUser = loggedInUser;
             return loggedInUser;
         } else {
             throw new UserNotFoundException("There is no account with that email address: " +  user.getEmail());
@@ -41,5 +44,9 @@ public class UserService implements IUserService {
 
     private boolean emailExist(String email) {
         return repository.findUserByEmail(email) != null;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
     }
 }

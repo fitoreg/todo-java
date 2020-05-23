@@ -6,6 +6,7 @@ import com.gashi.fitore.Todo.interfaces.ValidEmail;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 
 @Entity
 @Table(name = "user")
