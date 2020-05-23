@@ -1,7 +1,9 @@
 package com.gashi.fitore.Todo.controller;
 
 import com.gashi.fitore.Todo.helper.UserAlreadyExistException;
+import com.gashi.fitore.Todo.helper.UserNotFoundException;
 import com.gashi.fitore.Todo.interfaces.IUserService;
+import com.gashi.fitore.Todo.interfaces.ValidEmail;
 import com.gashi.fitore.Todo.model.TodoItem;
 import com.gashi.fitore.Todo.model.User;
 import com.gashi.fitore.Todo.repository.TodoItemRepository;
@@ -47,5 +49,10 @@ public class UserController {
     public User registerUserAccount(@Valid @NotNull @RequestBody User user) throws UserAlreadyExistException {
         User registered = userService.registerNewUserAccount(user);
         return registered;
+    }
+    
+    @PostMapping(value = "/login")
+    public User loginUser(@Valid @NotNull @RequestBody User user) throws UserNotFoundException {
+        return userService.loginUser(user);
     }
 }

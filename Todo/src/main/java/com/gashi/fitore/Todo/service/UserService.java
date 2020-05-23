@@ -1,6 +1,7 @@
 package com.gashi.fitore.Todo.service;
 
 import com.gashi.fitore.Todo.helper.UserAlreadyExistException;
+import com.gashi.fitore.Todo.helper.UserNotFoundException;
 import com.gashi.fitore.Todo.interfaces.IUserService;
 import com.gashi.fitore.Todo.model.User;
 import com.gashi.fitore.Todo.repository.UserRepository;
@@ -26,6 +27,16 @@ public class UserService implements IUserService {
         newUser.setEmail(user.getEmail());
 
         return repository.save(user);
+    }
+
+    public User loginUser(User user) throws UserNotFoundException {
+        User loggedInUser = repository.findUserByEmail(user.getEmail());
+        if (loggedInUser.getPassword().equals(user.getPassword())) {
+            System.out.println("*******: " + loggedInUser.getPassword());
+            return loggedInUser;
+        } else {
+            throw new UserNotFoundException("There is no account with that email address: " +  user.getEmail());
+        }
     }
 
     private boolean emailExist(String email) {
