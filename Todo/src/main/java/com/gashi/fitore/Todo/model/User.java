@@ -6,12 +6,12 @@ import com.gashi.fitore.Todo.interfaces.ValidEmail;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "user")
 @PasswordMatches
-public class User {
+public class User implements Serializable {
 
     private Long id;
 
@@ -22,18 +22,18 @@ public class User {
 
     @NotNull
     @NotEmpty
-    private String password;
+    private char[] password;
 
     @NotNull
     @NotEmpty
-    private String passwordConfirm;
+    private char[] passwordConfirm;
 
     // Empty Constructor
     public User() {
     }
 
     // Constructor
-    public User(Long id, @NotNull @NotEmpty String email, @NotNull @NotEmpty String password, @NotNull @NotEmpty String passwordConfirm) {
+    public User(Long id, @NotNull @NotEmpty String email, char[] password, char[] passwordConfirm) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -59,20 +59,20 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
+    public char[] getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(char[] password) {
         this.password = password;
     }
 
     @Transient
-    public String getPasswordConfirm() {
+    public char[] getPasswordConfirm() {
         return passwordConfirm;
     }
 
-    public void setPasswordConfirm(String passwordConfirm) {
+    public void setPasswordConfirm(char[] passwordConfirm) {
         this.passwordConfirm = passwordConfirm;
     }
 }
