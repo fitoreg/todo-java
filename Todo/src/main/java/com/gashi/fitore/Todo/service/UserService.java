@@ -34,7 +34,6 @@ public class UserService implements IUserService {
     public User loginUser(User user) throws UserNotFoundException {
         User loggedInUser = repository.findUserByEmail(user.getEmail());
         if (loggedInUser.getPassword().equals(user.getPassword())) {
-            System.out.println("*******: " + loggedInUser.getPassword());
             currentUser = loggedInUser;
             return loggedInUser;
         } else {
