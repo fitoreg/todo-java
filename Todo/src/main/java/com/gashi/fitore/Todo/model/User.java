@@ -22,18 +22,18 @@ public class User implements Serializable {
 
     @NotNull
     @NotEmpty
-    private char[] password;
+    private String password;
 
     @NotNull
     @NotEmpty
-    private char[] passwordConfirm;
+    private String passwordConfirm;
 
     // Empty Constructor
     public User() {
     }
 
     // Constructor
-    public User(Long id, @NotNull @NotEmpty String email, char[] password, char[] passwordConfirm) {
+    public User(Long id, @NotNull @NotEmpty String email, String password, String passwordConfirm) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -59,20 +59,20 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public char[] getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(char[] password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
     @Transient
-    public char[] getPasswordConfirm() {
+    public String getPasswordConfirm() {
         return passwordConfirm;
     }
 
-    public void setPasswordConfirm(char[] passwordConfirm) {
+    public void setPasswordConfirm(String passwordConfirm) {
         this.passwordConfirm = passwordConfirm;
     }
 }
