@@ -20,6 +20,12 @@ public class TodoListForm extends JPanel {
     private JButton btnCreateTodo;
     private JTable tblView;
     private JPanel contentView;
+    private JTextField txtEditID;
+    private JTextField txtEditTODO;
+    private JButton btnEdit;
+    private JTextField txtDeleteID;
+    private JButton btnDelete;
+    private JButton btnDone;
 
     public User currentUser;
 
@@ -35,33 +41,69 @@ public class TodoListForm extends JPanel {
 
     public TodoListForm() {
 
-
-        tblView.setAutoCreateRowSorter(true);
-        tblView.setFillsViewportHeight(true);
-        tblView.setPreferredScrollableViewportSize(new Dimension(550, 200));
-
-        items = HTTPClient.getAllTodoItems((long) 1);
-        TodoItemTableModel tiModel = new TodoItemTableModel(Arrays.asList(items));
-
-
-        for (TodoItem item : items) {
-            System.out.println("Title: " + item.getTitle());
-
-        }
-
-        tblView.setModel(tiModel);
+        updateTableView();
 
         btnCreateTodo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 TodoItem todoItem = new TodoItem();
-                todoItem.setUserId((long) 1);
+                todoItem.setUserId((long) 1); // TODO: Replace with current user
                 todoItem.setTitle(txtInput.getText());
                 HTTPClient.postTodoItem(todoItem);
+                updateTableView();
+            }
+        });
+        btnEdit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!txtEditID.getText().isEmpty() && !txtEditTODO.getText().isEmpty()) {
+                    TodoItem itemToEdit = new TodoItem();
+                    itemToEdit.setId(Long.valueOf(txtEditID.getText()));
+                    itemToEdit.setUserId(Long.valueOf(1)); // TODO: Replace with current user
+                    itemToEdit.setTitle(txtEditTODO.getText());
+                    boolean success = HTTPClient.editTodoItem(itemToEdit);
+                    if (success) {
+                        updateTableView();
+                        JOptionPane.showMessageDialog(contentView, "Item was edited successfully!");
+                    } else  {
+                        JOptionPane.showMessageDialog(contentView, "There was an error editing the item.");
+                    }
+                }
+            }
+        });
+        btnDelete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
             }
         });
+        btnDone.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!txtEditID.getText().isEmpty()) {
+                    TodoItem itemToEdit = new TodoItem();
+                    itemToEdit.setId(Long.valueOf(txtEditID.getText()));
+                    itemToEdit.setUserId(Long.valueOf(1)); // TODO: Replace with current user
+                    itemToEdit.setIsDone(true);
+                    boolean success = HTTPClient.editTodoItem(itemToEdit);
+                    if (success) {
+                        updateTableView();
+                        JOptionPane.showMessageDialog(contentView, "Todo was completed successfully!");
+                    } else  {
+                        JOptionPane.showMessageDialog(contentView, "There was an error editing the item.");
+                    }
+                }
+            }
+        });
+    }
+
+    public void updateTableView() {
+        tblView.setAutoCreateRowSorter(true);
+        tblView.setFillsViewportHeight(true);
+        tblView.setPreferredScrollableViewportSize(new Dimension(550, 500));
+        items = HTTPClient.getAllTodoItems((long) 1);
+        TodoItemTableModel tiModel = new TodoItemTableModel(Arrays.asList(items));
+        tblView.setModel(tiModel);
     }
 
     public static void main(String[] args) {
