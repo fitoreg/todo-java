@@ -13,6 +13,8 @@ public class TodoApplication {
 	public static void main(String[] args) throws UserAlreadyExistException {
 		// Run the REST API
 		SpringApplication.run(TodoApplication.class, args);
+
+
 	}
 
 }
