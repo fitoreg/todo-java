@@ -48,7 +48,8 @@ public class TodoController {
     }
 
     // Declare PUT Method for TodoItem updates
-    @PutMapping TodoItem update(@Valid @NotNull @RequestBody TodoItem todoItem) {
+    @PutMapping(value = "/{userId}")
+    TodoItem update(@Valid @NotNull @RequestBody TodoItem todoItem) {
         return todoRepository.save(todoItem);
     }
 
