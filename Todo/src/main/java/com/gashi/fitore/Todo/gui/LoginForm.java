@@ -24,7 +24,7 @@ public class LoginForm {
                 if (txtFieldEmail.getText().isEmpty() || txtFieldPassword.getPassword().length == 0) {
                     JOptionPane.showMessageDialog(contentView, "Please fill all fields!");
                 } else {
-                    User loggedInUser = HTTPClient.loginWithCredentials(txtFieldEmail.getText(), txtFieldPassword.getPassword());
+                    User loggedInUser = HTTPClient.loginWithCredentials(txtFieldEmail.getText(), txtFieldPassword.getPassword().toString());
                     JOptionPane.showMessageDialog(contentView, "User: " + loggedInUser.getEmail());
                 }
             }
