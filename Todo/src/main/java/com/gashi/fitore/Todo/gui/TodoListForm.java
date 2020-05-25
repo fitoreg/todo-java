@@ -27,7 +27,8 @@ public class TodoListForm extends JPanel {
     private JButton btnDelete;
     private JButton btnDone;
 
-    public User currentUser;
+    private User currentUser;
+
 
     private TodoItem[] items;
 
@@ -39,15 +40,16 @@ public class TodoListForm extends JPanel {
         this.currentUser = currentUser;
     }
 
-    public TodoListForm() {
 
+    public TodoListForm(User currentUser) {
+        this.currentUser = currentUser;
         updateTableView();
 
         btnCreateTodo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 TodoItem todoItem = new TodoItem();
-                todoItem.setUserId((long) 1); // TODO: Replace with current user
+                todoItem.setUserId(currentUser.getId());
                 todoItem.setTitle(txtInput.getText());
                 HTTPClient.postTodoItem(todoItem);
                 updateTableView();
@@ -59,7 +61,7 @@ public class TodoListForm extends JPanel {
                 if (!txtEditID.getText().isEmpty() && !txtEditTODO.getText().isEmpty()) {
                     TodoItem itemToEdit = new TodoItem();
                     itemToEdit.setId(Long.valueOf(txtEditID.getText()));
-                    itemToEdit.setUserId(Long.valueOf(1)); // TODO: Replace with current user
+                    itemToEdit.setUserId(currentUser.getId());
                     itemToEdit.setTitle(txtEditTODO.getText());
                     boolean success = HTTPClient.editTodoItem(itemToEdit);
                     if (success) {
@@ -83,7 +85,7 @@ public class TodoListForm extends JPanel {
                 if (!txtEditID.getText().isEmpty()) {
                     TodoItem itemToEdit = new TodoItem();
                     itemToEdit.setId(Long.valueOf(txtEditID.getText()));
-                    itemToEdit.setUserId(Long.valueOf(1)); // TODO: Replace with current user
+                    itemToEdit.setUserId(currentUser.getId());
                     itemToEdit.setIsDone(true);
                     boolean success = HTTPClient.editTodoItem(itemToEdit);
                     if (success) {
@@ -101,14 +103,15 @@ public class TodoListForm extends JPanel {
         tblView.setAutoCreateRowSorter(true);
         tblView.setFillsViewportHeight(true);
         tblView.setPreferredScrollableViewportSize(new Dimension(550, 500));
-        items = HTTPClient.getAllTodoItems((long) 1);
+        items = HTTPClient.getAllTodoItems(this.currentUser.getId());
         TodoItemTableModel tiModel = new TodoItemTableModel(Arrays.asList(items));
         tblView.setModel(tiModel);
     }
 
-    public static void main(String[] args) {
+
+    public void setup() {
         frame = new JFrame("TodoListForm");
-        frame.setContentPane(new TodoListForm().contentView);
+        frame.setContentPane(new TodoListForm(this.currentUser).contentView);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);

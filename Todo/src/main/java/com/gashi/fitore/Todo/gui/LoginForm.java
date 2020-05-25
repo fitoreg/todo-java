@@ -31,8 +31,9 @@ public class LoginForm extends JPanel {
                     User loggedInUser = HTTPClient.loginWithCredentials(txtFieldEmail.getText(), decryptedPassword);
                     JOptionPane.showMessageDialog(contentView, "User: " + loggedInUser.getEmail());
 
-                    JFrame frame = new JFrame("TodoListForm");
-                    frame.setVisible(true);
+                    TodoListForm frame = new TodoListForm(loggedInUser);
+                    frame.setCurrentUser(loggedInUser);
+                    frame.setup();
                 }
             }
         });
@@ -50,8 +51,8 @@ public class LoginForm extends JPanel {
                     User registeredUser = HTTPClient.registerUserWithCredentials(txtFieldEmail.getText(), decryptedPassword);
                     JOptionPane.showMessageDialog(contentView, "User: " + registeredUser.getEmail());
 
-                    
-
+                    TodoListForm frame = new TodoListForm(registeredUser);
+                    frame.setup();
                 }
             }
         });
