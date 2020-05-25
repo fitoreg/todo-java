@@ -2,6 +2,7 @@ package com.gashi.fitore.Todo.helper;
 
 import com.gashi.fitore.Todo.model.TodoItem;
 import com.gashi.fitore.Todo.model.User;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.http.*;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -22,7 +23,7 @@ public class HTTPClient {
     public HTTPClient() {
     }
 
-    public static User loginWithCredentials(String email, char[] password) throws HttpServerErrorException {
+    public static User loginWithCredentials(String email, String password) throws HttpServerErrorException {
         // request url
         String url = "http://localhost:8080/todo/user/login";
 
@@ -119,5 +120,38 @@ public class HTTPClient {
         ResponseEntity<TodoItem> response = restTemplate.postForEntity(url, request, TodoItem.class);
 
         return response.getBody();
+    }
+
+    public static boolean editTodoItem(TodoItem todoItem) {
+        // request url
+        String url = "http://localhost:8080/todo/" + todoItem.getUserId();
+
+        // create an instance of RestTemplate
+        RestTemplate restTemplate = new RestTemplate();
+
+        // create headers
+        HttpHeaders headers = new HttpHeaders();
+        // set `content-type` header
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        // set `accept` header
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+
+        // request body parameters
+        Map<String, Object> map = new HashMap<>();
+        map.put("id", todoItem.getId());
+        map.put("userId", todoItem.getUserId());
+        map.put("title", todoItem.getTitle());
+        map.put("isDone", todoItem.isDone());
+
+        // build the request
+        HttpEntity<TodoItem> request = new HttpEntity<>(todoItem, headers);
+
+        // send POST request
+        ResponseEntity<TodoItem> response = restTemplate.exchange(url, HttpMethod.PUT, request, TodoItem.class, map);;
+        if (response.getStatusCode() == HttpStatus.OK) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
