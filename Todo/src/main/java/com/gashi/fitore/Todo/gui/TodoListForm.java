@@ -76,23 +76,11 @@ public class TodoListForm extends JPanel {
         btnDelete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-        btnDone.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (!txtEditID.getText().isEmpty()) {
-                    TodoItem itemToEdit = new TodoItem();
-                    itemToEdit.setId(Long.valueOf(txtEditID.getText()));
-                    itemToEdit.setUserId(currentUser.getId());
-                    itemToEdit.setIsDone(true);
-                    boolean success = HTTPClient.editTodoItem(itemToEdit);
+                if (!txtDeleteID.getText().isEmpty()) {
+                    boolean success = HTTPClient.deleteTodoItem(txtDeleteID.getText());
                     if (success) {
                         updateTableView();
-                        JOptionPane.showMessageDialog(contentView, "Todo was completed successfully!");
-                    } else  {
-                        JOptionPane.showMessageDialog(contentView, "There was an error editing the item.");
+                        JOptionPane.showMessageDialog(contentView, "Item was deleted successfully!");
                     }
                 }
             }
@@ -107,7 +95,6 @@ public class TodoListForm extends JPanel {
         TodoItemTableModel tiModel = new TodoItemTableModel(Arrays.asList(items));
         tblView.setModel(tiModel);
     }
-
 
     public void setup() {
         frame = new JFrame("TodoListForm");

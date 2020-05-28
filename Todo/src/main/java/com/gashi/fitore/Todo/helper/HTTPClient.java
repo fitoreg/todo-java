@@ -203,4 +203,22 @@ public class HTTPClient {
             return false;
         }
     }
+
+    public static boolean deleteTodoItem(String id) {
+        // request url
+        String url = "http://localhost:8080/todo/" + id.toString();
+
+        // create an instance of RestTemplate
+        RestTemplate restTemplate = new RestTemplate();
+
+        // create headers
+        HttpHeaders headers = new HttpHeaders();
+        // set `content-type` header
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        // set `accept` header
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        // send POST request
+        restTemplate.delete(url);
+        return true;
+    }
 }

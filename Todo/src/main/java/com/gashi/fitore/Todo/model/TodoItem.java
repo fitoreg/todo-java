@@ -18,7 +18,6 @@ public class TodoItem {
 
     // @NotBlank: Annotation that manages the title string to be never blank
     // Title of the TodoItem
-    @NotBlank
     private String title;
 
     // Completion flag
@@ -29,7 +28,7 @@ public class TodoItem {
     }
 
     // Constructor
-    public TodoItem(Long id, Long userId, @NotBlank String title, boolean isDone) {
+    public TodoItem(Long id, Long userId, String title, boolean isDone) {
         this.id = id;
         this.userId = userId;
         this.title = title;

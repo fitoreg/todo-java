@@ -19,7 +19,7 @@ public class TodoItemTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 3;
+        return 2;
     }
 
     @Override
@@ -29,8 +29,6 @@ public class TodoItemTableModel extends AbstractTableModel {
                 return "id";
             case 1:
                 return "Title";
-            case 2:
-                return "Completed";
             default:
                 return "";
         }
@@ -38,7 +36,7 @@ public class TodoItemTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Object value = "??";
+        Object value = "";
         TodoItem todoItem = todoItemList.get(rowIndex);
         switch (columnIndex) {
             case 0:
@@ -46,9 +44,6 @@ public class TodoItemTableModel extends AbstractTableModel {
                 break;
             case 1:
                 value = todoItem.getTitle();
-                break;
-            case 2:
-                value = todoItem.isDone();
                 break;
         }
         return value;
